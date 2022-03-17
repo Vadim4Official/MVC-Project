@@ -14,7 +14,8 @@
             <form action="" method="POST">
                 <div class="mb-3">
                     <label for="inputName" class="form-label">Ваше ФИО:</label>
-                    <input type="text" name="name" class="form-control" id="inputName" placeholder="Фамилия Имя Отчество" required>
+                    <input type="text" name="name" class="form-control" id="inputName" placeholder="Фамилия Имя Отчество">
+                    <?= (isset($error['name']) ? var_dump($error['name']) : '') ?>
                 </div>
                 <div class="mb-3">
                     <label for="inputLogin" class="form-label">Ваш логин:</label>
