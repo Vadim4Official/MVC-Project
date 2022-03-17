@@ -6,13 +6,29 @@ function view($name, $arg = []) {
 
     # Функция в переменной для определения есть ли ошибка
     $isError = function($errorName, $input = false) use ($error) {
-        if(!isset($error[$errorName])) return '';
+        $firstError = isset($error[$errorName]) ? $error[$errorName] : null;
+        if(!isset($firstError) && !$input) return '';
         if($input) {
-            return 'class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback"';
+            $class = (isset($firstError) ? 'is-invalid' : '');
+            $arrAttributes = [];
+            $arrAttributes["class"][] = "form-control";
+            $arrAttributes["class"][] = $class;
+            $arrAttributes["aria_describedby"][] = "validation{$errorName}Feedback";
+
+            $attributes = '';
+            foreach($arrAttributes as $key => $items) {
+                $key = str_replace('_', '-', $key);
+                $attributes .= " $key='";
+                foreach($items as $item)
+                    $attributes .= " $item";
+                $attributes .= "'";
+            }
+
+            return $attributes;
         }
         else {
-            return '<div id="validationServer03Feedback" class="invalid-feedback">
-                  Please provide a valid city.
+            return '<div id="' . "validation{$errorName}Feedback" . '" class="invalid-feedback">
+                  ' . (isset($firstError) ? implode('<br>', $firstError) : '') . '
                 </div>';
         }
     };
