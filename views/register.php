@@ -1,11 +1,10 @@
 <?php
     $title = 'Регистрация в системе';
-    $css[] = 'register/main.css';
     @include_once 'header.php';
 ?>
 
 <?= ( isset($_GET['error_password'])
-    ? "<div class='error'>Пароли не совпали!</div>"
+    ? "<div class='alert alert-danger'>Пароли не совпали!</div>"
     : "" )
 ?>
 <div class="container">
@@ -23,11 +22,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="inputPassword" class="form-label">Ваш пароль:</label>
-                    <input type="password" name="passsword" class="form-control" id="inputPassword" placeholder="Укажите пароль:" required>
+                    <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Укажите пароль:" required>
                 </div>
                 <div class="mb-3">
                     <label for="inputPasswordConfirmed" class="form-label">Ваш повтор пароля:</label>
-                    <input type="password" name="passsword_confirmed" class="form-control" id="inputPasswordConfirmed" placeholder="Укажите пароль повторно:" required>
+                    <input type="password" name="password_confirmed" class="form-control" id="inputPasswordConfirmed" placeholder="Укажите пароль повторно:" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Регистрация</button>
             </form>
