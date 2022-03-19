@@ -1,6 +1,7 @@
 <?php
 function view($name, $arg = []) {
     ob_start();
+    # Создаем переменные из названия ключей с использованием операции переменные переменных
     if(isset($arg) && $arg != [])
         foreach($arg as $key => $value) {
             $$key = $value;
