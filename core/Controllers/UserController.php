@@ -74,7 +74,7 @@ class UserController extends BaseController
 
         # Если пользователь не найден, то выведет ошибку!
         if(count($fUser) == 0) {
-            $errors['error_auth'][] = '';
+            $errors['error_auth'][] = 'tr';
             return view('users/login', compact('errors'));
         }
 
