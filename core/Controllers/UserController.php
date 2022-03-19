@@ -30,8 +30,10 @@ class UserController extends BaseController
             return view('register', compact('errors'));
 
         unset($_POST['password_confirmed']);
+        # Шифруем пароль в SHA1
+        $_POST['password'] = sha1($_POST['password']);
         $user = new User();
-        $findUser = $user->create($_POST);
-        return var_dump($findUser);
+        $user = $user->create($_POST);
+        return view('users/successRegister', compact('user'));
     }
 }

@@ -118,6 +118,21 @@ abstract class Model extends \mysqli
         $this->join_query .= " JOIN `{$table}` ON `{$this->table}`.`{$compound[0]}` = `{$table}`.`{$compound[1]}`";
     }
 
+    /**
+     * Метод позволяющий определить уникальное ли значение в таблице
+     * @param $column - колонка для проверки на уникальность
+     * @param $value - значение которое проверяется
+     * @return bool
+     */
+    public function unique_column($column, $value)
+    {
+        $column = $this->real_escape_string(trim($column));
+        $value = $this->real_escape_string(trim($value));
+        $query = "SELECT COUNT(*) as `count` FROM `{$this->table}` WHERE `{$column}` = '{$value}'";
+        $result = $this->query($query)->fetch_assoc();
+        return $result->count > 0;
+    }
+
     public function __destruct()
     {
         # закрываем
